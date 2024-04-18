@@ -1,3 +1,1 @@
-# Docker Course Resources
-
-Solutions to the workbooks are inside the **complete** Docker Bootcamp (See Video Description).
+https://www.youtube.com/watch?v=s69slvfVp0I
