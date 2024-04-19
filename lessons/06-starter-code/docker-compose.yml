@@ -8,10 +8,11 @@ services:
       MYSQL_PASSWORD: 'password'
     ports: 
       - '3306:3306'
-    volumes: # Volumes to be mounted in the container, used for data persistence
+    volumes: 
+      - new-db:/var/lib/mysql #数据存在主机里，docker down之后数据还在
 
   flaskapp:
-    image: # your image here
+    image: grade-submission:0.0.1 # your image here
     depends_on:
       - mysql
     environment:
@@ -22,4 +23,6 @@ services:
     ports: 
       - '8080:8080'
 volumes:
-   # Define named volumes here. These volumes can be used by services for persistent storage
+  new-db: 
+
+## docker system prune -a --volumes 删除卷volumes

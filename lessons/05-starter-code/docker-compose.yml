@@ -1,16 +1,25 @@
 version: '3.3'
 services:
   mysql:
-    image:            # The Docker image to use for the MySQL service
-    environment:      # Environment variables passed into the MySQL container 
-                      # (credentials can be initialized here; see the documentation for MySQL)
+    image: mysql/mysql-server:8.0           # The Docker image to use for the MySQL service
+    environment:    
+      MYSQL_DATABASE: 'db' 
+      MYSQL_USER: 'user' 
+      MYSQL_PASSWORD: 'password'  
     ports:            
-      -  # Port mapping between the host and the container
+      -  '3306:3306'
 
   flaskapp:
-    image:            # The Docker image to use for the Flask application service
+    image: flask-mysql:latest           # The Docker image to use for the Flask application service
     depends_on:       
-      -  # Does this service depend on the creation of other services before it?
-    environment:      # Environment variables passed into the flask application 
+      -  mysql
+    environment:
+      DATABASE_HOST: 'mysql'
+      DATABASE_USER: 'user' 
+      DATABASE_PASSWORD: 'password'
+      DATABASE_NAME: 'db' 
     ports:
-      -  # Port mapping between the host and the container
+      -  '8000:3000'
+
+## docker compose up
+## docker compose down
